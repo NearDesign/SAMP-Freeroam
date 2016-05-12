@@ -4,7 +4,7 @@ Credits: SmallMate, Simo, Jinx
 
 Thanks for everyone who contributed to make this project real.
 */
-
+TOTASO CALIENTE
 #include <a_samp>
 #include <zcmd>
 #include <YSI\y_ini>
