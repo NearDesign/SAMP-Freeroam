@@ -17,6 +17,7 @@
 
 #define COLOR_WHITE 		0xFFFFFFFF
 #define COLOR_NORMAL_PLAYER 0xFFBB7777
+#define COLOR_BLUE          0x2D5FF
 
 #define CITY_LOS_SANTOS 	0
 #define CITY_SAN_FIERRO 	1
@@ -50,14 +51,9 @@ main()
 
 public OnPlayerConnect(playerid)
 {
-	GameTextForPlayer(playerid,"~w~Grand Larceny",3000,4);
-  	SendClientMessage(playerid,COLOR_WHITE,"Bienvenidos al servidor");
-  	
+	GameTextForPlayer(playerid,"~w~[Nombre del Servidor]",3000,4);
+  	SendClientMessage(playerid,COLOR_BLUE,"Bienvenidos al [Nombre del servidor]");
   	// class selection init vars
-  	gPlayerCitySelection[playerid] = -1;
-	gPlayerHasCitySelected[playerid] = 0;
-	gPlayerLastCitySelectionTick[playerid] = GetTickCount();
-
 	//SetPlayerColor(playerid,COLOR_NORMAL_PLAYER);
 
 	/*
@@ -81,43 +77,25 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerSpawn(playerid)
 {
-	if(IsPlayerNPC(playerid)) return 1;
+	if(IsPlayerNPC(playerid)) return 0;
 	
 	new randSpawn = 0;
 	
 	SetPlayerInterior(playerid,0);
 	TogglePlayerClock(playerid,0);
  	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, 250000);
+	GivePlayerMoney(playerid, 99999);
 
-	if(CITY_LOS_SANTOS == gPlayerCitySelection[playerid]) {
+	if(CITY_LOS_SANTOS == randSpawn) {
  	    randSpawn = random(sizeof(gRandomSpawns_LosSantos));
  	    SetPlayerPos(playerid,
 		 gRandomSpawns_LosSantos[randSpawn][0],
 		 gRandomSpawns_LosSantos[randSpawn][1],
 		 gRandomSpawns_LosSantos[randSpawn][2]);
 		SetPlayerFacingAngle(playerid,gRandomSpawns_LosSantos[randSpawn][3]);
-		GivePlayerWeapon(playerid,WEAPON_MP5,999);
+		GivePlayerWeapon(playerid,WEAPON_MP5,99999);
+		SendClientMessage(playerid,COLOR_WHITE,"Invita a tus amigos y disfruta el servidor");
 	}
-	else if(CITY_SAN_FIERRO == gPlayerCitySelection[playerid]) {
- 	    randSpawn = random(sizeof(gRandomSpawns_SanFierro));
- 	    SetPlayerPos(playerid,
-		 gRandomSpawns_SanFierro[randSpawn][0],
-		 gRandomSpawns_SanFierro[randSpawn][1],
-		 gRandomSpawns_SanFierro[randSpawn][2]);
-		SetPlayerFacingAngle(playerid,gRandomSpawns_SanFierro[randSpawn][3]);
-		GivePlayerWeapon(playerid,WEAPON_MP5,999);
-	}
-	else if(CITY_LAS_VENTURAS == gPlayerCitySelection[playerid]) {
- 	    randSpawn = random(sizeof(gRandomSpawns_LasVenturas));
- 	    SetPlayerPos(playerid,
-		 gRandomSpawns_LasVenturas[randSpawn][0],
-		 gRandomSpawns_LasVenturas[randSpawn][1],
-		 gRandomSpawns_LasVenturas[randSpawn][2]);
-		SetPlayerFacingAngle(playerid,gRandomSpawns_LasVenturas[randSpawn][3]);
-		GivePlayerWeapon(playerid,WEAPON_MP5,999);
-	}
-
 	//SetPlayerColor(playerid,COLOR_NORMAL_PLAYER);
 	
 	/*
@@ -132,12 +110,9 @@ public OnPlayerSpawn(playerid)
     SetPlayerSkillLevel(playerid,WEAPONSKILL_AK47,200);
     SetPlayerSkillLevel(playerid,WEAPONSKILL_M4,200);
     SetPlayerSkillLevel(playerid,WEAPONSKILL_SNIPERRIFLE,200);*/
-    
-    GivePlayerWeapon(playerid,WEAPON_COLT45,100);
 	//GivePlayerWeapon(playerid,WEAPON_MP5,100);
-	TogglePlayerClock(playerid, 0);
 
-	return 1;
+	return 0;
 }
 
 //----------------------------------------------------------
@@ -237,12 +212,12 @@ ClassSel_SetupSelectedCity(playerid)
 	if(gPlayerCitySelection[playerid] == -1) {
 		gPlayerCitySelection[playerid] = CITY_LOS_SANTOS;
 	}
-	
+
 	if(gPlayerCitySelection[playerid] == CITY_LOS_SANTOS) {
 		SetPlayerInterior(playerid,0);
    		SetPlayerCameraPos(playerid,1630.6136,-2286.0298,110.0);
 		SetPlayerCameraLookAt(playerid,1887.6034,-1682.1442,47.6167);
-		
+
 		TextDrawShowForPlayer(playerid,txtLosSantos);
 		TextDrawHideForPlayer(playerid,txtSanFierro);
 		TextDrawHideForPlayer(playerid,txtLasVenturas);
@@ -251,7 +226,7 @@ ClassSel_SetupSelectedCity(playerid)
 		SetPlayerInterior(playerid,0);
    		SetPlayerCameraPos(playerid,-1300.8754,68.0546,129.4823);
 		SetPlayerCameraLookAt(playerid,-1817.9412,769.3878,132.6589);
-		
+
 		TextDrawHideForPlayer(playerid,txtLosSantos);
 		TextDrawShowForPlayer(playerid,txtSanFierro);
 		TextDrawHideForPlayer(playerid,txtLasVenturas);
@@ -260,7 +235,7 @@ ClassSel_SetupSelectedCity(playerid)
 		SetPlayerInterior(playerid,0);
    		SetPlayerCameraPos(playerid,1310.6155,1675.9182,110.7390);
 		SetPlayerCameraLookAt(playerid,2285.2944,1919.3756,68.2275);
-		
+
 		TextDrawHideForPlayer(playerid,txtLosSantos);
 		TextDrawHideForPlayer(playerid,txtSanFierro);
 		TextDrawShowForPlayer(playerid,txtLasVenturas);
@@ -350,7 +325,7 @@ public OnPlayerRequestClass(playerid, classid)
 
 public OnGameModeInit()
 {
-	SetGameModeText("Grand Larceny");
+	SetGameModeText("[Probando]");
 	ShowPlayerMarkers(PLAYER_MARKERS_MODE_GLOBAL);
 	ShowNameTags(1);
 	SetNameTagDrawDistance(40.0);
@@ -528,5 +503,22 @@ public OnPlayerUpdate(playerid)
 
 	return 1;
 }
+
+public OnPlayerCommandText(playerid, cmdtext[])
+{
+	if (strcmp("/ayuda", cmdtext, true, 10) == 0)
+	SendClientMessage(playerid,COLOR_WHITE,"[Probando]");
+	{
+	if(!strcmp(cmdtext, "/ayuda", true))
+{
+    ShowPlayerDialog(playerid, 1, DIALOG_STYLE_LIST, "Probando?", "Buenas como estas xd");
+    return 1;
+}
+		// Do something here
+		return 1;
+	}
+	return 0;
+}
+
 
 //----------------------------------------------------------
