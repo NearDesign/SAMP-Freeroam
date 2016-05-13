@@ -507,18 +507,13 @@ public OnPlayerUpdate(playerid)
 public OnPlayerCommandText(playerid, cmdtext[])
 {
 	if (strcmp("/ayuda", cmdtext, true, 10) == 0)
-	SendClientMessage(playerid,COLOR_WHITE,"[Probando]");
-	{
-	if(!strcmp(cmdtext, "/ayuda", true))
-{
-    ShowPlayerDialog(playerid, 1, DIALOG_STYLE_LIST, "Probando?", "Buenas como estas xd");
-    return 1;
-}
-		// Do something here
+	ShowPlayerDialog(playerid, 1,DIALOG_STYLE_LIST, "Probando", " Solo quiero probar", "Comprar", "Cancelar");
+ {
+		// Aqui es la funcion
+
 		return 1;
 	}
 	return 0;
 }
-
 
 //----------------------------------------------------------
