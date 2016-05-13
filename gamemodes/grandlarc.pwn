@@ -81,6 +81,7 @@ public OnPlayerSpawn(playerid)
 	
 	new randSpawn = 0;
 	
+	
 	SetPlayerInterior(playerid,0);
 	TogglePlayerClock(playerid,0);
  	ResetPlayerMoney(playerid);
@@ -111,7 +112,7 @@ public OnPlayerSpawn(playerid)
     SetPlayerSkillLevel(playerid,WEAPONSKILL_M4,200);
     SetPlayerSkillLevel(playerid,WEAPONSKILL_SNIPERRIFLE,200);*/
 	//GivePlayerWeapon(playerid,WEAPON_MP5,100);
-
+	//equisde
 	return 0;
 }
 
@@ -507,13 +508,18 @@ public OnPlayerUpdate(playerid)
 public OnPlayerCommandText(playerid, cmdtext[])
 {
 	if (strcmp("/ayuda", cmdtext, true, 10) == 0)
-	ShowPlayerDialog(playerid, 1,DIALOG_STYLE_LIST, "Probando", " Solo quiero probar", "Comprar", "Cancelar");
- {
-		// Aqui es la funcion
-
+	SendClientMessage(playerid,COLOR_WHITE,"[Probando]");
+	{
+	if(!strcmp(cmdtext, "/ayuda", true))
+{
+    ShowPlayerDialog(playerid, 1, DIALOG_STYLE_LIST, "Probando?", "Buenas como estas xd");
+    return 1;
+}
+		// Do something here
 		return 1;
 	}
 	return 0;
 }
+
 
 //----------------------------------------------------------
