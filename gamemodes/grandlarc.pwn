@@ -51,7 +51,7 @@ main()
 public OnPlayerConnect(playerid)
 {
 	GameTextForPlayer(playerid,"~w~Grand Larceny",3000,4);
-  	SendClientMessage(playerid,COLOR_WHITE,"Welcome to {88AA88}G{FFFFFF}rand {88AA88}L{FFFFFF}arceny");
+  	SendClientMessage(playerid,COLOR_WHITE,"Bienvenidos al servidor");
   	
   	// class selection init vars
   	gPlayerCitySelection[playerid] = -1;
@@ -88,7 +88,7 @@ public OnPlayerSpawn(playerid)
 	SetPlayerInterior(playerid,0);
 	TogglePlayerClock(playerid,0);
  	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, 30000);
+	GivePlayerMoney(playerid, 250000);
 
 	if(CITY_LOS_SANTOS == gPlayerCitySelection[playerid]) {
  	    randSpawn = random(sizeof(gRandomSpawns_LosSantos));
@@ -97,6 +97,7 @@ public OnPlayerSpawn(playerid)
 		 gRandomSpawns_LosSantos[randSpawn][1],
 		 gRandomSpawns_LosSantos[randSpawn][2]);
 		SetPlayerFacingAngle(playerid,gRandomSpawns_LosSantos[randSpawn][3]);
+		GivePlayerWeapon(playerid,WEAPON_MP5,999);
 	}
 	else if(CITY_SAN_FIERRO == gPlayerCitySelection[playerid]) {
  	    randSpawn = random(sizeof(gRandomSpawns_SanFierro));
@@ -105,6 +106,7 @@ public OnPlayerSpawn(playerid)
 		 gRandomSpawns_SanFierro[randSpawn][1],
 		 gRandomSpawns_SanFierro[randSpawn][2]);
 		SetPlayerFacingAngle(playerid,gRandomSpawns_SanFierro[randSpawn][3]);
+		GivePlayerWeapon(playerid,WEAPON_MP5,999);
 	}
 	else if(CITY_LAS_VENTURAS == gPlayerCitySelection[playerid]) {
  	    randSpawn = random(sizeof(gRandomSpawns_LasVenturas));
@@ -113,6 +115,7 @@ public OnPlayerSpawn(playerid)
 		 gRandomSpawns_LasVenturas[randSpawn][1],
 		 gRandomSpawns_LasVenturas[randSpawn][2]);
 		SetPlayerFacingAngle(playerid,gRandomSpawns_LasVenturas[randSpawn][3]);
+		GivePlayerWeapon(playerid,WEAPON_MP5,999);
 	}
 
 	//SetPlayerColor(playerid,COLOR_NORMAL_PLAYER);
